@@ -1,0 +1,47 @@
+package com.example.program2;
+
+import java.util.Scanner;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+
+@SpringBootApplication
+public class Program2Application {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		SpringApplication.run(Program2Application.class, args);
+		ClassPathXmlApplicationContext ac= new ClassPathXmlApplicationContext("pro2.xml");
+		Department dt = (Department)ac.getBean("department");
+		while(true) {
+			System.out.println("1.enter the department details\n + 2.display details\n +3.exit");
+			System.out.println("enter the choice");
+			int a = sc.nextInt(); 
+			switch(a) {
+			case 1:
+				System.out.println("enter the department name");
+				dt.setName(sc.next());
+				System.out.println("enter the department no");
+				dt.setId(sc.nextInt());
+				System.out.println("enter the department description");
+				dt.setDescription(sc.next());
+				System.out.println("thank you");
+				break;
+				case 2:
+					System.out.println("Department details");
+					System.out.println("Name:"+dt.getName()+" "+"Id:"+dt.getId()+"Department description "+dt.getDescription());
+					System.out.println("College details");
+					College c = dt.getCollege();
+					System.out.println("College Name:"+c.getName());
+					System.out.println("Collge Address:"+c.getAddress());
+					break;
+					case 3:
+						System.exit(0);
+				}
+			}
+			
+			}
+}
