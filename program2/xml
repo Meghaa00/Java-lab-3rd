@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="department" class="com.example.program2.Department" scope="prototype">
+    <constructor-arg name="college" ref="college"/>
+    </bean>
+  
+    <bean id="college" class="com.example.program2.College" scope="prototype">
+    <property name="Name" value="Rv college"/>
+    <property name="address" value="banglore"/>
+   
+</bean>
+</beans>
