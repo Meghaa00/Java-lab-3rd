@@ -1,0 +1,54 @@
+package com.example.TestJPA2;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Iterator;
+import java.util.List;
+
+@Service
+public class CustomerService {
+
+    @Autowired
+    CustomerRepository customerRepository;
+
+    public void insert(String email, String password, int totalPurchase){
+        Customer customer = new Customer();
+        customer.setEmail(email);
+        customer.setPassword(password);
+        customer.setTotalPurchase(totalPurchase);
+
+        customerRepository.save(customer);
+    }
+
+    public List<Customer> display(){
+        return customerRepository.findAll();
+    }
+
+    public Customer search(int id){
+         return customerRepository.findById(id).orElse(null);
+
+    }
+
+    public Customer update(int id, String password){
+        Customer c =  customerRepository.findById(id).orElse(null);
+        if(c != null){
+            c.setPassword(password);
+            customerRepository.save(c);
+        }
+        return c;
+    }
+
+
+    public String delete(int id){
+        Customer c =  customerRepository.findById(id).orElse(null);
+        if(c != null){
+            customerRepository.deleteById(id);
+            return "DELETED";
+        } else {
+            return "NOT Found";
+        }
+
+
+    }
+}
