@@ -1,0 +1,44 @@
+package com.example.TestJPA2;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+
+import java.util.List;
+
+@SpringBootApplication
+public class TestJpa2Application {
+
+	public static void main(String[] args) {
+		ApplicationContext ac = SpringApplication.run(TestJpa2Application.class, args);
+		CustomerService cs = ac.getBean(CustomerService.class);
+
+//		cs.insert("sri1@mail.com", "sri", 100);
+//		List<Customer> customers = cs.display();
+//		for(Customer c : customers){
+//			System.out.println(c.id);
+//			System.out.println(c.email);
+//			System.out.println(c.password);
+//
+//		}
+
+		Customer c = cs.update(1, "123");
+		if(c != null){
+			System.out.println("Updated password: "+c.password);
+		}
+
+		Customer searchd = cs.search(1);
+		if(searchd != null){
+			System.out.println("id : "+searchd.id);
+			System.out.println("id : "+searchd.email);
+			System.out.println("id : "+searchd.password);
+		}
+		else{
+			System.out.println("Not found");
+		}
+
+		cs.delete(1);
+		cs.delete(2);
+	}
+
+}
