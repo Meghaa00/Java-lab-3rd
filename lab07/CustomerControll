@@ -1,0 +1,31 @@
+package com.example.LabCycle07;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/api/cust")
+public class CustomerController {
+	
+	@Autowired
+	CustomerService cs;
+	
+	@GetMapping("/get")
+	public List<Customer> getAll(){
+		return cs.getAllCustomers(); 
+	}
+	
+	@PostMapping("/post")
+	public Customer post(@RequestBody Customer c) {
+		String fname=c.getFirstName();
+		String lname=c.getLastName();
+		cs.addCustomer(fname, lname);
+		return c;
+	}
+}
